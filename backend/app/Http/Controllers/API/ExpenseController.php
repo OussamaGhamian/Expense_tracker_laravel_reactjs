@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\API;
 
-require_once dirname(__DIR__) . 'helper.php';
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ExpenseResource;
@@ -12,6 +11,8 @@ use Exception;
 use Illuminate\Http\Request;
 
 use function PHPUnit\Framework\isEmpty;
+
+require_once dirname(__DIR__, 4) . '/helper.php';
 
 class ExpenseController extends Controller
 {
@@ -24,9 +25,9 @@ class ExpenseController extends Controller
     {
         try {
             $expenses = Expense::all();
-            if (!isEmpty($expenses) && isset($expenses))
+            if (sizeof($expenses))
                 return response(sendJson('Expenses retrieved successfully.', $expenses));
-            return response(sendJson('Expenses has not been retrieved successfully.'), 404);
+            return response(sendJson('Expenses have not been retrieved successfully.'), 404);
         } catch (Exception $ex) {
             return response(sendJson("Internal server error, Error: {$ex->getMessage()} "), 500);
         }
@@ -41,13 +42,16 @@ class ExpenseController extends Controller
     public function store(Request $request)
     {
         try {
-            $request['user_id'] = Auth()->id();
+            $request['user_id'] = auth()->id();
             $expense = Expense::create($request->validate([
+                'user_id' => 'required',
                 'name' => 'required',
                 'amount' => 'required',
-                'user_id' => 'required',
+                'category_id' => 'required',
             ]));
-            return response(['msg' => "New expense has been added. $expense"], 404);
+            if ($expense)
+                return response(sendJson('Expense has been stored successfully.', $expense));
+            return response(['msg' => "New expense has been stored. $expense"], 404);
         } catch (Exception $ex) {
             return response(['msg' => "Internal server error, Error: {$ex->getMessage()} "], 500);
         }
@@ -79,12 +83,14 @@ class ExpenseController extends Controller
      */
     public function update(Request $request, Expense $expense)
     {
+        $request['name'] = $request['name'] ?? $expense->name;
+        $request['amount'] = $request['amount'] ?? $expense->amount;
+        $request['category_id'] = $request['category_id'] ?? $expense->category_id;
         try {
-            $expense['user_id'] = auth()->id();
             $expense->update($request->validate([
                 'name' => 'required',
                 'amount' => 'required',
-                'user_id' => 'required',
+                'category_id' => 'required'
             ]));
             return response(['msg' => "The expense with id: $expense->id has been updated."], 404);
         } catch (Exception $ex) {

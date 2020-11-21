@@ -24,12 +24,16 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Expense whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Expense whereUserId($value)
  * @mixin \Eloquent
+ * @property-read \App\Models\Category $category
+ * @property-read \App\Models\User $user
+ * @property int $category_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereCategoryId($value)
  */
 class Expense extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'name', 'amount']; // you may not need 'user_id' to be checked later.
+    protected $fillable = ['category_id', 'name', 'amount', 'user_id']; // you may not need 'user_id' to be checked later.
 
     public function user()
     {
@@ -37,6 +41,6 @@ class Expense extends Model
     }
     public function category()
     {
-        // to do
+        return $this->belongsTo(Category::class);
     }
 }

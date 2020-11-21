@@ -37,6 +37,10 @@ use Laravel\Passport\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Category[] $categories
+ * @property-read int|null $categories_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Expense[] $expenses
+ * @property-read int|null $expenses_count
  */
 class User extends Authenticatable
 {
@@ -78,6 +82,6 @@ class User extends Authenticatable
     }
     public function categories()
     {
-        // to do
+        return $this->hasMany(Category::class);
     }
 }

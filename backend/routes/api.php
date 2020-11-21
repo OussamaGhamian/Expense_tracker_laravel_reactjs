@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::post('/register', 'API\AuthController@register');
-Route::post('/login', 'API\AuthController@login');
+Route::post('/login', 'API\AuthController@login')->name('login');
 
 Route::apiResource('/expense', 'API\ExpenseController')->middleware('auth:api');
+Route::apiResource('/category', 'API\CategoryController')->middleware('auth:api');
