@@ -1,0 +1,346 @@
+body, html {
+  height: 100%;
+}
+
+body {
+  color: #5d6dda;
+  font-family: "Roboto", sans-serif;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  scroll-behavior: smooth;
+}
+
+body .App {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100vh;
+}
+
+body .swap {
+  color: #5d6dda;
+  text-decoration: none;
+}
+
+body form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 15px;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  border-bottom-left-radius: 20px;
+  border-top-right-radius: 20px;
+  min-width: 95%;
+}
+
+body form button {
+  padding: 10px;
+  width: 80px;
+  background-color: #5d6dda;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  font-weight: bold;
+  outline: none;
+}
+
+body form label {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  font-size: smaller;
+}
+
+body form input,
+body form button {
+  margin: 15px auto;
+}
+
+body #outterForm {
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  padding: 10px 50px;
+  border-left: 4px solid #5d6dda;
+  border-top: 4px solid #5d6dda;
+  min-height: 400px;
+}
+
+body #outterForm input {
+  padding: 5px;
+  background-color: #ffffff;
+  width: 100%;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #5d6dda;
+}
+
+body #outterForm label {
+  font-size: large;
+  margin-top: 10px;
+}
+
+body .container {
+  height: 100vh;
+  width: 100%;
+}
+
+body .container input, body .container select {
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  outline: none;
+  padding: 5px;
+  border: 1px solid #DDDDDD;
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+
+body .container input:focus, body .container select:focus {
+  -webkit-box-shadow: 0 0 5px #5d6dda;
+          box-shadow: 0 0 5px #5d6dda;
+  border: 1px solid  #5d6dda;
+}
+
+body .container header {
+  padding: 5px 20px;
+  font-size: larger;
+  height: 45px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+body .container header .actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  min-width: 15%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: #5d6dda;
+  color: #ffffff;
+  padding: 7px 20px;
+  border-radius: 20px;
+}
+
+body .container .content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+body .container .content .RsubContainer {
+  margin: auto;
+}
+
+body .container .content .RsubContainer .chart {
+  padding: 10px;
+  border-radius: 15px;
+  margin: auto;
+  margin-bottom: 25px;
+  -webkit-box-shadow: 10px 10px 20px #d9d9d9, -10px -10px 20px #ffffff;
+          box-shadow: 10px 10px 20px #d9d9d9, -10px -10px 20px #ffffff;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+body .container .content .RsubContainer .chart:hover {
+  -webkit-box-shadow: 0 8px 8px 0 rgba(69, 7, 184, 0.4);
+          box-shadow: 0 8px 8px 0 rgba(69, 7, 184, 0.4);
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+body .container .content .RsubContainer form {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin-top: 15px;
+}
+
+body .container .content .RsubContainer form .disabledBtn {
+  background-color: gray !important;
+}
+
+body .container .content .sideMenu {
+  min-width: 25%;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  padding: 22px 20px 0px 20px;
+  border-top-left-radius: 25px;
+  overflow-y: scroll;
+  height: 85.5vh;
+  /* width */
+  /* Handle */
+  /* Handle on hover */
+}
+
+body .container .content .sideMenu::-webkit-scrollbar {
+  width: 12px;
+}
+
+body .container .content .sideMenu::-webkit-scrollbar-thumb {
+  background: #828fe5;
+  border-radius: 10px;
+}
+
+body .container .content .sideMenu::-webkit-scrollbar-thumb:hover {
+  background: #5d6dda;
+}
+
+body .container .content .sideMenu:hover {
+  -webkit-box-shadow: 0 8px 16px 0 rgba(69, 7, 184, 0.7);
+          box-shadow: 0 8px 16px 0 rgba(69, 7, 184, 0.7);
+}
+
+body .container .content .sideMenu .category {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-top: 2px solid #5d6dda;
+  border-radius: 5px;
+  border-bottom: 2px solid #5d6dda;
+  margin-bottom: 30px;
+  margin-top: 20px;
+}
+
+body .container .content .sideMenu .category .title {
+  font-weight: bolder;
+}
+
+body .container .content .sideMenu .expense {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 30px 0px;
+  padding: 12px;
+  border-radius: 10px;
+  background: #ffffff;
+  -webkit-box-shadow: 10px 10px 20px #d9d9d9, -10px -10px 20px #ffffff;
+          box-shadow: 10px 10px 20px #d9d9d9, -10px -10px 20px #ffffff;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+}
+
+body .container .content .sideMenu .expense input {
+  width: 75px;
+  margin: 0px 5px;
+}
+
+body .container .content .sideMenu .expense .upper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+}
+
+body .container .content .sideMenu .expense .lower {
+  font-size: x-small;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  margin-top: auto;
+  background-color: #5d6dda;
+  color: white;
+  padding: 5px;
+  border-radius: 50px;
+}
+
+body .container .content .sideMenu .expense:hover {
+  -webkit-box-shadow: inset 10px 10px 20px #d9d9d9, inset -10px -10px 20px #ffffff;
+          box-shadow: inset 10px 10px 20px #d9d9d9, inset -10px -10px 20px #ffffff;
+}
+
+body .container .content .sideMenu .control-wide {
+  margin-bottom: 10px;
+  min-width: 35%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media screen and (max-width: 960px) {
+  .RsubContainer {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  #root > div > div > div > div.react-reveal.RsubContainer > div > form {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .content {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+/*# sourceMappingURL=style.css.map */

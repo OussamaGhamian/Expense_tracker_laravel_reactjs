@@ -21,7 +21,8 @@ class CategoryController extends Controller
     public function index()
     {
         try {
-            $categories = Category::all();
+            // return only specific user categories
+            $categories = Category::whereUserId(auth()->user()->id)->latest()->get();
             if (sizeof($categories))
                 return response(sendJson('Categories retrieved successfully.', $categories));
             return response(sendJson('Categories have not been retrieved successfully.'), 404);
@@ -81,11 +82,12 @@ class CategoryController extends Controller
         $request['title'] = $request['title'] ?? $category->title;
 
         try {
-            $category = $category->update($request->validate([
+            $cat = $request->validate([
                 "title" => 'required',
-            ]));
+            ]);
+            $category = $category->update($cat);
             if ($category)
-                return response(sendJson('Category has been updated successfully.', $category));
+                return response(["msg" => 'Category has been updated successfully.', "data" => $cat]);
             return response(sendJson('Categories has not been updated successfully.'), 404);
         } catch (Exception $ex) {
             return response(sendJson("Internal server error, Error: {$ex->getMessage()}"), 500);

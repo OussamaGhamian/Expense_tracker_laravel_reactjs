@@ -1,23 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
+import './components/styles/style.css';
+import { Container, Login, Register } from './components';
 
 function App() {
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState('');
+  useEffect(() => {
+    setUser(localStorage.getItem('user'));
+    console.log(localStorage.getItem('token'));
+  }, [])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        {
+          token || localStorage.getItem('token') ?
+            <>
+              <Redirect to='/' />
+              <Route exact path="/">
+                <Container user={user} setToken={setToken} />
+              </Route>
+            </>
+            :
+            <>
+              <Redirect to='/login' />
+              <Route path="/login">
+                <Login setUser={setUser} setToken={setToken} />
+              </Route>
+              <Route path="/register">
+                <Register setUser={setUser} setToken={setToken} />
+              </Route>
+            </>
+        }
+      </Router>
+
     </div>
   );
 }

@@ -24,8 +24,8 @@ class ExpenseController extends Controller
     public function index()
     {
         try {
-            $expenses = Expense::all();
-            if (sizeof($expenses))
+            $expenses = Expense::whereUserId(auth()->user()->id)->latest()->get();
+            if (sizeof([$expenses]))
                 return response(sendJson('Expenses retrieved successfully.', $expenses));
             return response(sendJson('Expenses have not been retrieved successfully.'), 404);
         } catch (Exception $ex) {
@@ -87,12 +87,13 @@ class ExpenseController extends Controller
         $request['amount'] = $request['amount'] ?? $expense->amount;
         $request['category_id'] = $request['category_id'] ?? $expense->category_id;
         try {
-            $expense->update($request->validate([
+            $exp =$request->validate([
                 'name' => 'required',
                 'amount' => 'required',
                 'category_id' => 'required'
-            ]));
-            return response(['msg' => "The expense with id: $expense->id has been updated."], 404);
+            ]);
+            $expense->update($exp);
+            return response(['msg' => "The expense with id: $expense->id has been updated.", 'data' => $exp]);
         } catch (Exception $ex) {
             return response(['msg' => "Internal server error, Error: {$ex->getMessage()} "], 500);
         }

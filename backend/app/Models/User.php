@@ -41,6 +41,8 @@ use Laravel\Passport\HasApiTokens;
  * @property-read int|null $categories_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Expense[] $expenses
  * @property-read int|null $expenses_count
+ * @property string $image
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereImage($value)
  */
 class User extends Authenticatable
 {
@@ -55,6 +57,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'image'
     ];
 
     /**
