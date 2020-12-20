@@ -22,55 +22,57 @@ export default function ExpensesList({ categoryId, editMode, expenses, setExpens
         setName('');
         handleUpdate(resource, id, setter, dataset, data);
     }
-    // const hasExpenses = (array, catID) => {
-    //     array.forEach(element => {
-    //         if (element.category_id === catID)
-    //             return true;
-
-    //     });
-    //     return false;
-    // }
+    const hasExpenses = (array, catID) => {
+        let sum = 0;
+        array.forEach(element => {
+            if (element.category_id === catID)
+                sum++;
+        })
+        return sum;
+    }
 
     return (
         <div>
             {
-                expenses.length &&
-                expenses.map(expense => {
-                    if (expense.category_id === categoryId) {
-                        return <Zoom key={expense.id}>
-                            <div key={expense.id} className='expense'>
-                                <div className='upper'>
-                                    <p>
-                                        <RiCoinsLine />
-                                        {editItem !== expense.id ? expense.name : <input type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} />}
-                                    </p>
-                                    <div className='control-wide'>
-                                        {editItem !== expense.id ? <CountUp end={expense.amount} duration={10} decimals={2} separator=',' /> : <input type="number" placeholder="Amount" value={amount} onChange={e => setAmount(e.target.value)} />}
-                                        {editMode ?
-                                            <Fade>
-                                                {editItem === expense.id ?
-                                                    <div>
-                                                        {name && amount && <Zoom><BsCheckBox size={25} onClick={() => update('expense', expense.id, setExpenses, expenses, { name, amount: parseInt(amount) })} /></Zoom>}
-                                                    </div>
-                                                    :
-                                                    <div className="control-wide">
-                                                        <GiCrossMark onClick={() => handleDelete('expense', expense.id, setExpenses, expenses)} />
-                                                        <MdEdit onClick={() => setEditItem(expense.id)} />
-                                                    </div>
-                                                }
-                                            </Fade>
-                                            :
-                                            <Fade>
-                                                <FcMoneyTransfer />
-                                            </Fade>
-                                        }
+                hasExpenses(expenses, categoryId) && expenses.length ?
+                    expenses.map(expense => {
+                        if (expense.category_id === categoryId) {
+                            return <Zoom key={expense.id}>
+                                <div key={expense.id} id={expense.id} className='expense'>
+                                    <div className='upper'>
+                                        <p>
+                                            <RiCoinsLine />
+                                            {editItem !== expense.id ? expense.name : <input type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} />}
+                                        </p>
+                                        <div className='control-wide' >
+                                            {editItem !== expense.id ? <CountUp end={expense.amount} duration={10} decimals={2} separator=',' /> : <input type="number" placeholder="Amount" value={amount} onChange={e => setAmount(e.target.value)} />}
+                                            {editMode ?
+                                                <Fade>
+                                                    {editItem === expense.id ?
+                                                        <div>
+                                                            {name && amount && <Zoom><BsCheckBox size={25} onClick={() => update('expense', expense.id, setExpenses, expenses, { name, amount: parseInt(amount) })} /></Zoom>}
+                                                        </div>
+                                                        :
+                                                        <div className="control-wide" style={{ width: 60 }}>
+                                                            <GiCrossMark onClick={() => handleDelete('expense', expense.id, setExpenses, expenses)} />
+                                                            <MdEdit onClick={() => setEditItem(expense.id)} />
+                                                        </div>
+                                                    }
+                                                </Fade>
+                                                :
+                                                <Fade>
+                                                    <FcMoneyTransfer />
+                                                </Fade>
+                                            }
+                                        </div>
                                     </div>
+                                    <p className="lower">{Math.floor((Date.now() - new Date(expense.updated_at).getTime()) / (60 * 60 * 24 * 1000))} Days ago</p>
                                 </div>
-                                <p className="lower">{Math.floor((Date.now() - new Date(expense.updated_at).getTime()) / (60 * 60 * 24 * 1000))} Days ago</p>
-                            </div>
-                        </Zoom>
-                    }
-                })
+                            </Zoom>
+                        }
+                    })
+                    :
+                    <div className='expense'>No expenses for this category</div>
             }
         </div>
     )

@@ -39,9 +39,22 @@ const getData = async (resource, setter) => {
     setter([...response.data.data]);
 }
 
+const catchViolation = (dataset, data, key) => {
+
+}
 const handleSubmit = async (e, resource, data, setter, dataset) => {
     e.preventDefault();
+    let key = resource === 'category' ? 'title' : 'name';
+    // () ? catchViolation(dataset, data, 'title') : catchViolation(dataset, data, 'name');
     try {
+        dataset.forEach(item => {
+            if (item[key] === data[key]) {
+                alert(`!!! Violation !!!
+
+                No redundant ${resource}`)
+                throw new Error("violation");
+            }
+        })
         const response = await axios.post(`http://localhost:8000/api/${resource}`, data, {
             headers: {
                 'Content-Type': 'application/json',
@@ -55,10 +68,6 @@ const handleSubmit = async (e, resource, data, setter, dataset) => {
             setter([response.data.data])
     } catch (err) {
         console.log(err);
-        alert(`!!! Violation has happened !!!
-        
-        \u2022Duplicate categories are not allowed
-        \u2022Duplicate expenses are not allowed`);
     }
 }
 const handleDelete = async (resource, id, setter, dataset) => {
